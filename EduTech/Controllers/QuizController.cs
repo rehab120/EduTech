@@ -25,5 +25,22 @@ namespace EduTech.Controllers
 
             return Ok(quiz);
         }
+        [HttpPost("AddQuiz")]
+        public async Task<IActionResult> AddQuiz([FromBody] Quiz quiz)
+        {
+            if (quiz == null || quiz.Questions == null || quiz.Questions.Count == 0)
+                return BadRequest("Quiz and its questions are required.");
+
+            quiz.Id = Guid.NewGuid().ToString();
+            foreach (var q in quiz.Questions)
+            {
+                q.Id = Guid.NewGuid().ToString();
+                q.QuizId = quiz.Id;
+            }
+
+            _quizRepository.AddQuizWithQuestions(quiz);
+            return Ok("Quiz added successfully.");
+        }
+
     }
 }

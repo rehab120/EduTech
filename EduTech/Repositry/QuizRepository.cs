@@ -19,5 +19,11 @@ namespace EduTech.Repositories
                 .Include(q => q.Questions)
                 .FirstOrDefaultAsync(q => q.Category == category && q.Level == level);
         }
+        public void AddQuizWithQuestions(Quiz quiz)
+        {
+            _context.Quiz.Add(quiz);
+            _context.SaveChanges();
+        }
+
     }
 }
