@@ -30,6 +30,7 @@ namespace EduTech
 
             builder.Services.AddScoped<IIdentityRepositry, IdentityRepositry>();
             builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+            builder.Services.AddScoped<IUserQuizRepository, UserQuizRepository>();
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultProvider;
