@@ -27,8 +27,7 @@ namespace EduTech.Repositry
         {
             ApplicationUser newUser = new ApplicationUser();
             {
-                newUser.FirstName = user.FirstName;
-                newUser.LastName = user.LastName;
+                
                 newUser.UserName = user.UserName;
                 newUser.Email = user.Email;
 
@@ -42,19 +41,19 @@ namespace EduTech.Repositry
             return (true, new List<string>(), newUser);
         }
 
-        public async Task<(bool Success, string Token, List<string> Errors, List<string> Roles)> LoginAsync(string Email, String password)
+        public async Task<(bool Success, string Token, List<string> Errors, List<string> Roles)> LoginAsync(string Username, String password)
         {
-            var user = await _userManager.FindByEmailAsync(Email);
+            var user = await _userManager.FindByNameAsync(Username);
             if (user == null)
-                return (false, null, new() { "Invalid Email or password" }, null);
+                return (false, null, new() { "Invalid Username or password" }, null);
 
             var result = await signInManager.CheckPasswordSignInAsync(user, password, false);
             if (!result.Succeeded)
-                return (false, null, new() { "Invalid Email or password" }, null);
+                return (false, null, new() { "Invalid Username or password" }, null);
 
             var claims = new List<Claim>
             {
-               new Claim(ClaimTypes.Email, user.Email),
+               new Claim(ClaimTypes.Name, user.UserName),
                new Claim(ClaimTypes.NameIdentifier, user.Id),
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
