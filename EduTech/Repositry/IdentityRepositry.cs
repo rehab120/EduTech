@@ -82,6 +82,23 @@ namespace EduTech.Repositry
             return (true, tokenString, new(), roles.ToList());
         }
 
+        public async Task<(bool Success, List<string> Errors)> LogoutAsync(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+                return (false, new() { "No token provided" });
+
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var exp = jwtToken.Claims.FirstOrDefault(c => c.Type == "exp")?.Value;
+
+            if (exp == null)
+                return (false, new() { "Invalid token" });
+
+            var expiry = DateTimeOffset.FromUnixTimeSeconds(long.Parse(exp)).UtcDateTime;
+            _blacklistedTokens[token] = expiry;
+
+            return (true, new() { "Logged out successfully" });
+        }
 
     }
 }
