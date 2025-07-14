@@ -11,6 +11,7 @@ namespace EduTech.Models
         public string Id { get; set; } = string.Empty;
 
         [ValidateNever]
+        [JsonPropertyName("theQuestion")]
         public string TheQuestion { get; set; } = string.Empty;
 
         [ValidateNever]
