@@ -29,6 +29,7 @@ namespace EduTech
             });
 
             builder.Services.AddScoped<IIdentityRepositry, IdentityRepositry>();
+            builder.Services.AddScoped<IStudentRepositry, StudentRepositry>();
             builder.Services.AddScoped<IQuizRepository, QuizRepository>();
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

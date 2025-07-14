@@ -23,37 +23,40 @@ namespace EduTech.Repositry
             this._roleManager = _roleManager;
             this.signInManager = signInManager;
         }
+   
         public async Task<(bool Success, List<string> Errors, ApplicationUser? User)> RegisterAsync(Student user)
         {
-            ApplicationUser newUser = new ApplicationUser();
+            ApplicationUser newUser = new ApplicationUser
             {
-                
-                newUser.UserName = user.UserName;
-                newUser.Email = user.Email;
+                UserName = user.UserName,
+                Email = user.Email
+            };
 
-            }
             IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
+
             if (!result.Succeeded)
             {
                 return (false, result.Errors.Select(e => e.Description).ToList(), null);
             }
+
             await _userManager.AddToRoleAsync(newUser, "Student");
+
             return (true, new List<string>(), newUser);
         }
 
-        public async Task<(bool Success, string Token, List<string> Errors, List<string> Roles)> LoginAsync(string Username, String password)
+        public async Task<(bool Success, string Token, List<string> Errors, List<string> Roles)> LoginAsync(string Email, String password)
         {
-            var user = await _userManager.FindByNameAsync(Username);
+            var user = await _userManager.FindByEmailAsync(Email);
             if (user == null)
-                return (false, null, new() { "Invalid Username or password" }, null);
+                return (false, null, new() { "Invalid Email or password" }, null);
 
             var result = await signInManager.CheckPasswordSignInAsync(user, password, false);
             if (!result.Succeeded)
-                return (false, null, new() { "Invalid Username or password" }, null);
+                return (false, null, new() { "Invalid Email or password" }, null);
 
             var claims = new List<Claim>
             {
-               new Claim(ClaimTypes.Name, user.UserName),
+               new Claim(ClaimTypes.Email, user.Email),
                new Claim(ClaimTypes.NameIdentifier, user.Id),
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
