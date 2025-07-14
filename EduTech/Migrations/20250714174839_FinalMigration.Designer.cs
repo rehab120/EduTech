@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduTech.Migrations
 {
     [DbContext(typeof(ContextEduTech))]
-    [Migration("20250714163445_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20250714174839_FinalMigration")]
+    partial class FinalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
