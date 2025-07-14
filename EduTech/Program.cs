@@ -33,10 +33,7 @@ namespace EduTech
             {
                 options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultProvider;
             }).AddEntityFrameworkStores<ContextEduTech>().AddDefaultTokenProviders();
-            var app = builder.Build();
-
             builder.Services.AddCustomJwtAuth(builder.Configuration);
-
 
             builder.Services.AddCors(options =>
             {
@@ -47,6 +44,12 @@ namespace EduTech
                           .AllowAnyHeader();
                 });
             });
+
+
+            var app = builder.Build();
+
+            app.UseCors("AllowAll");
+            app.UseMiddleware<TokenBlacklistMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

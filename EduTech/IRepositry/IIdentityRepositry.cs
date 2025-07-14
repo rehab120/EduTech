@@ -6,5 +6,6 @@ namespace EduTech.IRepositry
     {
         Task<(bool Success, List<string> Errors, ApplicationUser? User)> RegisterAsync(Student user);
         Task<(bool Success, string Token, List<string> Errors, List<string> Roles)> LoginAsync(string Username, String password);
+        Task<(bool Success, List<string> Errors)> LogoutAsync(string token);
     }
 }
