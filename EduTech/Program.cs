@@ -1,5 +1,6 @@
 
 using EduTech.Extension;
+using EduTech.ID_Generator;
 using EduTech.IRepositry;
 using EduTech.Models;
 using EduTech.Models.Context;
@@ -32,6 +33,7 @@ namespace EduTech
             builder.Services.AddScoped<IStudentRepositry, StudentRepositry>();
             builder.Services.AddScoped<IQuizRepository, QuizRepository>();
             builder.Services.AddScoped<IUserQuizRepository, UserQuizRepository>();
+            builder.Services.AddScoped<IdGenerator>();
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultProvider;

@@ -1,4 +1,5 @@
-﻿using EduTech.Models;
+﻿using EduTech.ID_Generator;
+using EduTech.Models;
 using EduTech.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace EduTech.Controllers
     public class QuizController : ControllerBase
     {
         private readonly IQuizRepository _quizRepository;
+        private readonly IdGenerator idGenerator;
 
-        public QuizController(IQuizRepository quizRepository)
+        public QuizController(IQuizRepository quizRepository,IdGenerator idGenerator)
         {
             _quizRepository = quizRepository;
+            this.idGenerator = idGenerator;
         }
 
         [HttpGet("GetQuiz")]
@@ -31,10 +34,11 @@ namespace EduTech.Controllers
             if (quiz == null || quiz.Questions == null || quiz.Questions.Count == 0)
                 return BadRequest("Quiz and its questions are required.");
 
-            quiz.Id = Guid.NewGuid().ToString();
+            //quiz.Id = Guid.NewGuid().ToString();
+            quiz.Id = idGenerator.GenerateId<Quiz>(ModelPrefix.Quiz);
             foreach (var q in quiz.Questions)
             {
-                q.Id = Guid.NewGuid().ToString();
+                q.Id = idGenerator.GenerateId<Question>(ModelPrefix.Question);
                 q.QuizId = quiz.Id;
             }
 
