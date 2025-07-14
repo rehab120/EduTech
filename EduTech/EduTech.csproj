@@ -23,11 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="IRepositry\" />
     <Folder Include="DTO\" />
-    <Folder Include="Extension\" />
-    <Folder Include="Repositry\" />
   </ItemGroup>
 
 </Project>
