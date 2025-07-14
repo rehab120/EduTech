@@ -9,7 +9,6 @@ namespace EduTech.Models
         public string Id { get; set; } = string.Empty;
 
         [Required]
-        [JsonIgnore]
         public List<Question> Questions { get; set; } = new List<Question>();
 
         [Required]
