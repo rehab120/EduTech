@@ -42,18 +42,18 @@ namespace EduTech
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowFrontend", policy =>
+                options.AddPolicy("AllowAll", policy =>
                 {
-                    policy.WithOrigins("https://edu-tech-platform-xi.vercel.app/")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
                 });
             });
 
 
             var app = builder.Build();
 
-            app.UseCors("AllowFrontend");
+            app.UseCors("AllowAll");
             app.UseMiddleware<TokenBlacklistMiddleware>();
 
             // Configure the HTTP request pipeline.
