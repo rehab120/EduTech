@@ -27,5 +27,32 @@ namespace EduTech.Repositories
                 })
                 .ToListAsync();
         }
+        public async Task AddOrUpdateUserQuizAsync(UserQuiz userQuiz)
+        {
+            var existing = await _context.UserQuiz
+                .FirstOrDefaultAsync(uq => uq.QuizId == userQuiz.QuizId && uq.StudentId == userQuiz.StudentId);
+
+            if (existing != null)
+            {
+                existing.Score = userQuiz.Score;
+                _context.UserQuiz.Update(existing);
+            }
+            else
+            {
+                await _context.UserQuiz.AddAsync(userQuiz);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+        public async Task<int?> GetUserScoreForQuizAsync(string studentId, string category, string level)
+        {
+            return await _context.UserQuiz
+                .Include(uq => uq.Quiz)
+                .Where(uq => uq.StudentId == studentId && uq.Quiz.Category == category && uq.Quiz.Level == level)
+                .Select(uq => (int?)uq.Score)
+                .FirstOrDefaultAsync();
+        }
+
+
     }
 }
