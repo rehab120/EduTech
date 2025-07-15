@@ -31,7 +31,7 @@ namespace EduTech.Controllers
 
             return Ok(result);
         }
-
+        //Admin if exist
         [Authorize]
         [HttpGet("TakenQuizzesById")]
         public async Task<IActionResult> GetTakenQuizzesById([FromQuery] string userId)
