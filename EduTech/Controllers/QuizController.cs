@@ -35,10 +35,10 @@ namespace EduTech.Controllers
                 return BadRequest("Quiz and its questions are required.");
 
             //quiz.Id = Guid.NewGuid().ToString();
-            quiz.Id = idGenerator.GenerateId<Quiz>(ModelPrefix.Quiz);
+            quiz.Id = Guid.NewGuid().ToString();
             foreach (var q in quiz.Questions)
             {
-                q.Id = idGenerator.GenerateId<Question>(ModelPrefix.Question);
+                q.Id = Guid.NewGuid().ToString();
                 q.QuizId = quiz.Id;
             }
 
