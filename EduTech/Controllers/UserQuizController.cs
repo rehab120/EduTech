@@ -28,10 +28,7 @@ namespace EduTech.Controllers
 
             var result = await _userQuizRepository.GetTakenQuizzesWithScoresAsync(userId);
 
-            if (result == null || result.Count == 0)
-                return NotFound("No quizzes found for this user.");
-
-            return Ok(result);
+            return Ok(result ?? new List<UserQuizResultDto>());
         }
         [Authorize]
         [HttpPost("AddTakenQuiz")]

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduTech.Migrations
 {
     [DbContext(typeof(ContextEduTech))]
-    [Migration("20250715004740_CloudDatabase")]
-    partial class CloudDatabase
+    [Migration("20250715231737_Final")]
+    partial class Final
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
