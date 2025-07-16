@@ -1,3 +1,4 @@
+<img width="1920" height="1080" alt="Screenshot (1492)" src="https://github.com/user-attachments/assets/2ff0e651-6535-467d-a44e-0c14ae0ba3ad" />
 🎯 EduTech Backend – Quiz API
 
 This is the backend service for the EduTech platform – built to enhance the learning experience through interactive quizzes. It is developed using ASP.NET Core Web API, and follows clean and scalable practices such as Repository Pattern, Dependency Injection, and JWT Authentication.
