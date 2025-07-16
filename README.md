@@ -5,7 +5,6 @@ This is the backend service for the EduTech platform – built to enhance the le
 
 ---
  ✅ Key Feature: Interactive Quizzes
-<img width="1418" height="647" alt="Screenshot (1492)" src="https://github.com/user-attachments/assets/0971dd54-0a51-4237-8f19-fcf0a4d658d1" />
 
 The core functionality implemented in this backend is the **Quiz Module**, which allows:
 
@@ -27,5 +26,6 @@ The core functionality implemented in this backend is the **Quiz Module**, which
 - CORS configured for React frontend
 
 ---
+<img width="1418" height="647" alt="Screenshot (1492)" src="https://github.com/user-attachments/assets/0971dd54-0a51-4237-8f19-fcf0a4d658d1" />
 
 
